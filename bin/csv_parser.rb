@@ -35,13 +35,12 @@ def converter (file)
       final_text.push(fixed_data + zipcode + fixed_data2 + fixed_data3)
     end
   end
-  sales_count -= 1
   sales_count = sales_count.to_s
   final_text.push("94|" + sales_count + "|" + sales_count)
+  final_text = final_text.join("\n")
   File.open("test_file.txt", "a" ) {|f| f.write(final_text)}
-  # final_text += lines
 
-  return final_text
+  final_text
 end
 
 puts converter(file)
