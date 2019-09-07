@@ -29,10 +29,11 @@ def converter (file)
   total_sales = 0 #total sales gets incremented inside while loop so each of the sales within a transaction count
 
   file.each_with_index do |line, i|
-    product_title = line[4]
     if i == 0
       final_text.push("92" + yesterdays_date) #builds first line
     else
+      product_title = line[4]
+
       if !product_title.include?("DIGITAL ALBUM")
         next #skips and doesn't record all non-album sales
       end
@@ -48,7 +49,6 @@ def converter (file)
         total_sales += 1
         zipcode = line[1]
         final_text.push(data_line(zipcode, sales_counter))
-
         sales_counter += 1
       end
     end
