@@ -34,6 +34,10 @@ def converter (file)
     else
       sales_counter = 1 #initializes loop that gives each sale a number 001-005
       sales_per_transaction = line[6] #this is the number of sales per transaction from the csv
+      product_title = line[4]
+      if !product_title.include?("DIGITAL ALBUM")
+        next
+      end
 
       if sales_per_transaction.to_i > 5
         sales_per_transaction = 5
