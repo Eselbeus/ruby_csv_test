@@ -29,15 +29,16 @@ def converter (file)
   total_sales = 0 #total sales gets incremented inside while loop so each of the sales within a transaction count
 
   file.each_with_index do |line, i|
+    product_title = line[4]
     if i == 0
       final_text.push("92" + yesterdays_date) #builds first line
     else
+      if !product_title.include?("DIGITAL ALBUM")
+        next #skips and doesn't record all non-album sales
+      end
+
       sales_counter = 1 #initializes loop that gives each sale a number 001-005
       sales_per_transaction = line[6] #this is the number of sales per transaction from the csv
-      product_title = line[4]
-      if !product_title.include?("DIGITAL ALBUM")
-        next
-      end
 
       if sales_per_transaction.to_i > 5
         sales_per_transaction = 5
